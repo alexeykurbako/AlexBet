@@ -1,0 +1,32 @@
+
+.command {
+  margin-left: 25px;
+  margin-bottom: 10px;
+}
+
+::ng-deep .container {
+  margin-left: 10px;
+}
+
+.counter {
+  margin-left: 25px;
+  .countdown-label {
+
+  }
+  ::ng-deep .countdown {
+    display: flex;
+    flex-direction: row;
+    margin-left: 0;
+    width: 700px;
+    position: relative;
+    left: -210px;
+  }
+
+  .wrong-message {
+    color: red;
+  }
+}
+
+::ng-deep .measurements-number {
+  margin-bottom: 2px;
+}

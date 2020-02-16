@@ -1,0 +1,38 @@
+<nb-card>
+  <nb-card-header>
+    Some categories
+  </nb-card-header>
+  <nb-card-body class="example-items-col">
+    <div class='selectors'>
+      <label>Select category</label>
+      <nb-select placeholder="Select category" [(ngModel)]="selectedCategoryId" (selectedChange)="onChange()">
+        <nb-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</nb-option>
+      </nb-select>
+      <label>Select first team</label>
+      <nb-select placeholder="Select first team" [disabled]="selectedCategoryId ? 'false' : 'true'"
+                 [(ngModel)]="selectedFirstTeamId">
+        <nb-option *ngFor="let team of teams" value="{{team.id}}">{{team.name}}</nb-option>
+      </nb-select>
+      <label>Select second team</label>
+      <nb-select placeholder="Select second team" [disabled]="selectedCategoryId ? 'false' : 'true'"
+                 [(ngModel)]="selectedSecondTeamId">
+        <nb-option *ngFor="let team of teams" value="{{team.id}}">{{team.name}}</nb-option>
+      </nb-select>
+    </div>
+      <div [formGroup]="competitionForm" class="container">
+        <div class="form-group">
+          <label for="duration">Duration</label>
+          <input nbInput id="duration" formControlName="duration"
+                 [status]="(duration?.errors?.min || duration?.errors?.max || duration?.hasError('pattern')) ? 'danger' : 'primary'"
+                 class="form-control" placeholder="Duration">
+          <ngx-validation-message label="Duration" [showMin]="duration?.errors?.min" [showMax]="duration?.errors?.max"
+                                  [showRequired]="duration?.errors?.required"
+                                  [showPattern]="duration?.hasError('pattern')" min=1 max=12000></ngx-validation-message>
+        </div>
+      </div>
+
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton status="primary" [disabled]="!competitionForm.valid" (click)="create()" hero>Create</button>
+  </nb-card-footer>
+</nb-card>

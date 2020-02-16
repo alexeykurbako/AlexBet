@@ -1,0 +1,31 @@
+<nb-card >
+  <nb-card-header>
+    Finish competition
+  </nb-card-header>
+  <nb-card-body>
+    <div class="status"></div>
+    <div [formGroup]="resultForm" class="container">
+      <div class="form-group">
+        <label for="firstTeam">First team: {{competition.firstTeam.name}}</label>
+        <input nbInput id="firstTeam" formControlName="firstTeam"
+               [status]="(firstTeam?.errors?.min || firstTeam?.errors?.max || firstTeam?.hasError('pattern')) ? 'danger' : 'primary'"
+               class="form-control" placeholder="First team result">
+        <ngx-validation-message label="First team result" [showMin]="firstTeam?.errors?.min" [showMax]="firstTeam?.errors?.max"
+                                [showRequired]="firstTeam?.errors?.required"
+                                [showPattern]="firstTeam?.hasError('pattern')" min=1 max=12000></ngx-validation-message>
+      </div>
+      <div class="form-group">
+        <label for="secondTeam">Second team: {{competition.secondTeam.name}}</label>
+        <input nbInput id="secondTeam" formControlName="secondTeam"
+               [status]="(secondTeam?.errors?.min || secondTeam?.errors?.max || secondTeam?.hasError('pattern')) ? 'danger' : 'primary'"
+               class="form-control" placeholder="Second team result">
+        <ngx-validation-message label="Second team result" [showMin]="secondTeam?.errors?.min" [showMax]="secondTeam?.errors?.max"
+                                [showRequired]="secondTeam?.errors?.required"
+                                [showPattern]="secondTeam?.hasError('pattern')" min=1 max=12000></ngx-validation-message>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton status="primary" [disabled]="!resultForm.valid" (click)="finish()" hero>Finish</button>
+  </nb-card-footer>
+</nb-card>
